@@ -1,3 +1,4 @@
+python-3.11.9
 Django==5.0.6
 pandas==2.2.2
 xgboost==2.1.1
