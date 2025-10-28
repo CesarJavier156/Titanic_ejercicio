@@ -8,7 +8,7 @@
     <style>
         body {
             font-family: 'Poppins', sans-serif;
-            background: linear-gradient(135deg, #1f4037, #99f2c8);
+            background: linear-gradient(135deg, #a8edee, #a8edee);
             color: #333;
             display: flex;
             justify-content: center;
@@ -29,11 +29,18 @@
         h1 {
             color: #007bff;
             margin-bottom: 25px;
+            font-family:Verdana, Geneva, Tahoma, sans-serif;
+              text-shadow:
+    -1px -1px 0 #000, /* Sombra inferior izquierda */
+     1px -1px 0 #000, /* Sombra superior izquierda */
+    -1px  1px 0 #000, /* Sombra inferior derecha */
+     1px  1px 0 #000; /* Sombra superior derecha */
+
         }
 
         label {
             display: block;
-            text-align: left;
+            text-align: center;
             font-weight: 600;
             margin-top: 15px;
         }
@@ -48,7 +55,7 @@
         }
 
         select:focus, input:focus {
-            border-color: #007bff;
+            border-color: #000000;
             outline: none;
             box-shadow: 0 0 5px rgba(0,123,255,0.5);
         }
@@ -57,7 +64,7 @@
             width: 100%;
             padding: 10px;
             margin-top: 25px;
-            background-color: #007bff;
+            background-color: #1a293a;
             color: white;
             font-weight: 600;
             border: none;
@@ -67,7 +74,7 @@
         }
 
         button:hover {
-            background-color: #0056b3;
+            background-color: #5b5d5e;
         }
 
         footer {
@@ -79,17 +86,17 @@
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>Predicción de Supervivencia - Titanic</h1>
+    <div class="container" >
+        <h1>TITANIC</h1>
 
         <form method="POST">
             {% csrf_token %}
             
-            <label>Clase del pasajero:</label>
+            <label>Tipo de clase en el viaje:</label>
             <select name="pclass" required>
-                <option value="Primera">Primera</option>
-                <option value="Segunda">Segunda</option>
-                <option value="Tercera">Tercera</option>
+                <option value="Primera">Primera (Tarifa de £80)</option>
+                <option value="Segunda">Segunda (Tarifa de £30)</option>
+                <option value="Tercera">Tercera (Tarifa de £10)</option>
             </select>
 
             <label>Sexo:</label>
@@ -99,7 +106,7 @@
             </select>
 
             <label>Edad:</label>
-            <input type="number" name="age" step="0.1" min="1" max="99" required>
+            <input type="number" name="age" step="0" min="1" max="99" required>
 
             <label>Puerto de embarque:</label>
             <select name="embarked" required>
@@ -114,12 +121,12 @@
     </div>
 
     {% if result %}
-        {% if "Sobreviviría" in result %}
+        {% if "no" in result %}
             <script>
                 Swal.fire({
                     title: '{{ result }}',
                     text: 'Probabilidad de supervivencia: {{ probability }}%',
-                    icon: 'success',
+                    icon: 'error',
                     confirmButtonColor: '#007bff',
                     background: '#f9f9f9',
                     color: '#333',
@@ -134,8 +141,8 @@
                 Swal.fire({
                     title: '{{ result }}',
                     text: 'Probabilidad de supervivencia: {{ probability }}%',
-                    icon: 'error',
                     confirmButtonColor: '#007bff',
+                    icon: 'success',
                     background: '#f9f9f9',
                     color: '#333',
                     showConfirmButton: false,
